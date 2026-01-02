@@ -2,8 +2,31 @@ const input = document.getElementById("input");
 const container = document.getElementById("right-message");
 const textmessage = document.getElementById("text-message");
 const chatContainer = document.getElementById("login-card");
+const imgIput = document.getElementById("image-input");
+const message = document.getElementById("message");
+const imgcon = document.getElementById("img-container1");
 
+const btn = document.getElementById("btn");
+
+imgIput.addEventListener("input", function imgsend() {
+  let file = imgIput.files[0];
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  imgcon.appendChild(img);
+  message.appendChild(imgcon);
+});
+
+input.addEventListener("input", function () {
+  if (input.value.trim() !== "") {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+});
 function send() {
+  if (input.value.trim() === "") {
+    return;
+  }
   let rigthmessage = document.createElement("div");
   rigthmessage.id = "right-message";
   rigthmessage.innerHTML = `<img
@@ -18,6 +41,8 @@ function send() {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   input.value = "";
+  imgcon.remove();
+  btn.style.display = "none";
 
   let Ai = [
     "Hello! How can I assist you today?",
@@ -61,4 +86,26 @@ function send() {
     textmessage.appendChild(lefthmessage);
     lefthmessage.appendChild(botdiv);
   }, 1000);
+  //imgsend
+  function sendimg() {
+    const file1 = imgIput.files[0];
+    const imgCon1 = document.createElement("div");
+    imgCon1.className = "img-container";
+
+    const img1 = document.createElement("img");
+    img1.src = URL.createObjectURL(file1);
+    imgCon1.appendChild(img1);
+    rigthmessage.appendChild(imgCon1);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+  sendimg();
+
+  imgIput.value = "";
 }
+
+input.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    send();
+  }
+});
