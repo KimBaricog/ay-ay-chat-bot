@@ -22,7 +22,7 @@ main {
   background-color: transparent;
   width: 100%;
   height: calc(100vh - 20vh);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
   text-align: center;
   display: flex;
   flex-direction: column;
